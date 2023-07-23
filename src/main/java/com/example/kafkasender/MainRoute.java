@@ -12,7 +12,8 @@ public class MainRoute extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-        from("timer://" + "name" + "?fixedRate=true&period=100")
+        //from("timer://" + "name" + "?repeatCount=2")
+        from("timer://" + "name" + "?fixedRate=true&period=1&repeatCount=2")
                 .process(exchange -> {
                     MessageDto messageDto = new MessageDto();
                     messageDto.setTo("eyJzaWQiOjYxMTM4OCwibWlkIjoiODg1ODM1YWMtZmUwMC0xMWVjLTg0MTgtNTI1NDAwMDFhYzMyIiwidGNkIjoiNGQ2ZmNkZTItY2IyNC00YjE5LWFjMDktODkyNGFmMThiN2E0IiwiZW9sIjowLCJzbGMiOiJpaXMuZWNwLnJ1X3pucF8xLjAuMF9SZXF1ZXN0IiwibW5tIjoiVTQ4MjkwMSIsIm5zIjoidXJuOi8vaWlzLmVjcC5ydS96bnAvMS4wLjAifQ==");
@@ -27,6 +28,7 @@ public class MainRoute extends RouteBuilder {
                     exchange.getIn().setBody(messageDto);
                 })
                 .marshal().json(JsonLibrary.Jackson, MessageDto.class)
+                .log("Send kafka messsage: ${body}")
                 .to("kafka:ecp_smev_adapter_send_service?brokers=172.18.32.223:9092");
     }
 }
