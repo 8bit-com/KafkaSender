@@ -3,7 +3,7 @@ package com.example.kafkasender;
 import lombok.Data;
 
 @Data
-public class MessageDto {
+public class KafkaDto {
     private String messageId;
     private Long taskId;
     private String to;
