@@ -6,8 +6,8 @@ import lombok.Data;
 public class KafkaDto {
     private String messageId;
     private Long taskId;
-    private String to;
-    private String daEntityId;
-    private String sendXmlGuid;
     private String dtoMessage;
+    private String traceContext;
+    private Integer smevNamespaceId;
+    private String messageContent;
 }
