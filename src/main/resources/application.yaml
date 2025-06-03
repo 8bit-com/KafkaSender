@@ -49,7 +49,7 @@ spring:
     max-poll-records: 30
 
 tarantool:
-  host: localhost #tarantool-api.test.ecp
+  host: tarantool-api.test.ecp
   port: 3301
   username: admin
   password: tarantool-api-cluster-cookie
