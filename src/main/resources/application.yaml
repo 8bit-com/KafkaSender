@@ -1,2 +1,55 @@
 server:
   port: 8083
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: ecp-smev-adapter-sender
+  #  config:
+  #    import: optional:configserver:http://ecp-smev-adapter-config-server.dev.ecp/
+  #  cloud:
+  #    config:
+  #      enabled: false
+  cache:
+    type: simple
+  liquibase:
+    default-schema: ecp_smev_adapter
+    user: dev_ecp_smev_adapter_service
+    password: Pass123
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+    enabled: true
+  datasource:
+    url: jdbc:postgresql://172.18.41.42:5443/test1_ecp_smev_adapter?prepareThreshold=0
+    username: test1_ecp_smev_adapter_service
+    password: Pass123
+  jpa:
+    database: POSTGRESQL
+    open-in-view: false
+    properties:
+      hibernate:
+        default_schema: ecp_smev_adapter
+        jdbc:
+          batch_size: 100
+        order_inserts: true
+    hibernate:
+      use-new-id-generator-mappings: true
+  zipkin:
+    base-url: http://zipkin.test.ecp #http://localhost:9411
+    service:
+      name: ecp-smev-adapter-sender
+    enabled: true
+    sleuth:
+      enabled: true
+      sampler:
+        percentage: 1
+  kafka:
+    bootstrap-servers: 172.18.32.245:9092
+    sender-topic: ecp_smev_adapter_send_service
+    max-poll-records: 30
+
+tarantool:
+  host: tarantool-api.test.ecp
+  port: 3301
+  username: admin
+  password: tarantool-api-cluster-cookie

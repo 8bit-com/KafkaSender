@@ -64,6 +64,19 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
+
+        <!-- Tarantool api -->
+        <dependency>
+            <groupId>ru.gov.pfr.ecp.iis.smev.adapter</groupId>
+            <artifactId>spring-tarantool-api</artifactId>
+            <version>1.0.88</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.kafka</groupId>
+                    <artifactId>kafka-clients</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
     </dependencies>
 
     <build>
